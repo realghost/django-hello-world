@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+<h3>42 Coffee Cups Test Assignment</h3>
+
+<table width="80%">
+<tr><td width="50%">{{contact_info.name}}</td><td>Contacts</td></tr>
+<tr><td width="50%">{{contact_info.last_name}}</td><td>Email: {{contact_info.email}}</td></tr>
+<tr><td width="50%">{{contact_info.birth_date|date:"d.m.Y"}}</td><td>Jabber: {{contact_info.jabber}}</td></tr>
+<tr><td width="50%"></td><td>Skype: {{contact_info.skype}}</td></tr>
+<tr><td width="50%">Bio:</td><td>Other contacts:</td></tr>
+<tr><td width="50%">{{contact_info.bio}}</td><td>{{contact_info.other_contacts}}</td></tr>
+</table>
+{% endblock content %}

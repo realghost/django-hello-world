@@ -1,0 +1,16 @@
+[
+    {
+        "pk": 1,
+        "model": "contacts.personalinfo",
+        "fields": {
+            "bio": "A native of Lugansk. I currently live and work in Kiev.\r\nA physicist and freelance python programmer. ",
+            "last_name": "Matsevich",
+            "name": "Stanislav",
+            "other_contacts": "Tel. +380 95 154-8112",
+            "skype": "matsevich.devel",
+            "birth_date": "1986-02-28",
+            "jabber": "matsevich.devel@gmail.com",
+            "email": "matsevich.devel@gmail.com"
+        }
+    }
+]
