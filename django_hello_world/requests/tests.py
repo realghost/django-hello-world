@@ -12,14 +12,6 @@ from django.test.client import Client
 from django_hello_world.requests.models import RequestInfo
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
-
-
 class RequestTest(TestCase):
     """Tests request module"""
     
@@ -45,4 +37,43 @@ class RequestTest(TestCase):
         self.assertEqual(last_request.response_tell, response.tell())
         self.assertEqual(last_request.user_agent, 'Test: response1')
         self.assertTrue(start<=last_request.datetime<=finish)
+        
+    def test_request_html(self):
+        """
+        Tests that html-page contents all stored data of request and shows 
+        info about last 10 requests
+        """
+        c = Client()
+        response = c.get(reverse('requests'), REMOTE_ADDR='123.45.67.89', 
+                         SERVER_PROTOCOL='HTTP/1.0', HTTP_REFERER='http://r0/',
+                         HTTP_USER_AGENT='Test: resp0')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '123.45.67.89')
+        self.assertContains(response, 'HTTP/1.0')
+        self.assertContains(response, 'GET')
+        self.assertContains(response, reverse('requests'))
+        self.assertContains(response, 'http://r0/')
+        self.assertContains(response, response.status_code)
+        self.assertContains(response, response.tell())
+        self.assertContains(response, 'Test: resp0')
+        # OK. All firlds are present. 
+        # Now test that a few requests are shown
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp1')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp2')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp3')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp4')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp5')
+        self.assertContains(response, 'Test: resp0')
+        self.assertContains(response, 'Test: resp1')
+        self.assertContains(response, 'Test: resp2')
+        self.assertContains(response, 'Test: resp3')
+        self.assertContains(response, 'Test: resp4')
+        self.assertContains(response, 'Test: resp5')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp6')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp7')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp8')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp9')
+        response = c.get(reverse('requests'), HTTP_USER_AGENT='Test: resp10')
+        # 'Test: resp0' must be displaced        
+        self.assertNotContains(response, 'Test: resp0')
         
