@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django_hello_world.hello',
     'django_hello_world.contacts',
+    'django_hello_world.requests',
 )
 
 # A sample logging configuration. The only tangible logging
