@@ -30,3 +30,12 @@ class HttpTest(TestCase):
         self.assertContains(response, 'Email: matsevich.devel@gmail.com')
         self.assertContains(response, 'Jabber: matsevich.devel@gmail.com')
         self.assertContains(response, 'Skype: matsevich.devel')
+        
+        
+class ContextProcessorTest(TestCase):
+    def test_context_processor(self):
+        from django import template
+        from django_hello_world import settings
+        test_template = template.Template("{{settings.SECRET_KEY}}")
+        response = test_template.render(template.RequestContext({}))
+        self.assertEqual(response, settings.SECRET_KEY)
