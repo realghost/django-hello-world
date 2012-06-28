@@ -35,7 +35,7 @@ class HttpTest(TestCase):
 class ContextProcessorTest(TestCase):
     def test_context_processor(self):
         from django import template
-        from django_hello_world import settings
+        from main import settings
         test_template = template.Template("{{settings.SECRET_KEY}}")
         response = test_template.render(template.RequestContext({}))
         self.assertEqual(response, settings.SECRET_KEY)

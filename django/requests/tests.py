@@ -9,7 +9,7 @@ from datetime import datetime
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
-from django_hello_world.requests.models import RequestInfo
+from requests.models import RequestInfo
 
 
 class RequestTest(TestCase):

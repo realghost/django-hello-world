@@ -1,4 +1,4 @@
-import settings as django_settings
+import main.settings as django_settings
 
 def settings(request):
     """
