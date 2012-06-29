@@ -1,5 +1,5 @@
 from annoying.decorators import render_to
-from django_hello_world.contacts.models import PersonalInfo
+from contacts.models import PersonalInfo
 
 
 @render_to('contacts.html')

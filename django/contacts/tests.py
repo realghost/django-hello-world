@@ -10,14 +10,6 @@ from django.test import TestCase
 from django.test.client import Client
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
-
-
 class HttpTest(TestCase):
     def test_contacts(self):
         c = Client()
@@ -35,7 +27,7 @@ class HttpTest(TestCase):
 class ContextProcessorTest(TestCase):
     def test_context_processor(self):
         from django import template
-        from django_hello_world import settings
+        from main import settings
         test_template = template.Template("{{settings.SECRET_KEY}}")
         response = test_template.render(template.RequestContext({}))
         self.assertEqual(response, settings.SECRET_KEY)

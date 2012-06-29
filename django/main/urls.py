@@ -5,8 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'django_hello_world.contacts.views.contacts', name='contacts'),
-    url(r'^requests/$', 'django_hello_world.requests.views.requests_show', 
+    url(r'^$', 'contacts.views.contacts', name='contacts'),
+    url(r'^requests/$', 'requests.views.requests_show', 
         name='requests'),
     # url(r'^django_hello_world/', include('django_hello_world.foo.urls')),
 

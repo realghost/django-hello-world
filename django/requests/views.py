@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.shortcuts import render_to_response
-from django_hello_world.requests.models import RequestInfo
+from requests.models import RequestInfo
 
 
 def requests_show(request, count=10):

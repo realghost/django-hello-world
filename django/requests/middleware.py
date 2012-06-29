@@ -1,4 +1,4 @@
-from django_hello_world.requests.models import RequestInfo
+from requests.models import RequestInfo
 
 
 class RequestsMiddleware(object):

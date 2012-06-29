@@ -5,11 +5,11 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from datetime import datetime
+from django.utils.timezone import now
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
-from django_hello_world.requests.models import RequestInfo
+from requests.models import RequestInfo
 
 
 class RequestTest(TestCase):
@@ -21,11 +21,11 @@ class RequestTest(TestCase):
         correct
         """ 
         c = Client()
-        start = datetime.now()
+        start = now()
         response = c.get('/not_existing_path/', REMOTE_ADDR='123.45.67.89', 
                           SERVER_PROTOCOL='HTTP/1.0', HTTP_REFERER='http://r',
                           HTTP_USER_AGENT='Test: response1')
-        finish = datetime.now()
+        finish = now()
         last_request = RequestInfo.objects.latest()
         self.assertEqual(response.status_code, 404)
         self.assertEqual(last_request.ip, '123.45.67.89')
